@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>🎉$STABUL AIRDROP CHECKER🎉</title>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4357402771134218"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <div class="head">
+      <h1>🎉$STABUL AIRDROP CHECKER🎉</h1>
+    </div>
+    <div class="container">
+      <div class="card">
+        <div class="icon">
+          <img src="logo.jpg" alt="" />
+        </div>
+        <div class="content">
+          <input
+            type="text"
+            class="inputtext"
+            id="address"
+            placeholder="0x123..............................xyz"
+          />
+
+          <button onclick="copyText()" id="copying">SUBMIT</button>
+          <div class="down" id="Token"></div>
+          <div class="down" id="TGE"></div>
+          <div class="down"></div>
+          <div class="down"></div>
+        </div>
+      </div>
+    </div>
+    <p>Created with 💖</p>
+
+    <script>
+      async function copyText() {
+        let inputValue = document
+          .getElementById("address")
+          .value.trim()
+          .toLowerCase();
+        let transact = 0;
+        const response = await fetch("rewards.json"); // Make sure Reward.json is publicly accessible
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const rewardData = await response.json();
+
+        const result = rewardData.find((entry) => {
+          const entryAddress = entry.Address.toLowerCase()
+            .replace(/^0x/, "")
+            .replace(/\./g, "")
+            .split("")
+            .reverse()
+            .join("")
+            .substring(0, 8);
+          const reversedEntry = inputValue
+            .split("")
+            .reverse()
+            .join("")
+            .substring(0, 8);
+          return reversedEntry === entryAddress;
+        });
+        //console.log("Match - ", match);
+        //console.log(result);
+        if (result == undefined) {
+          document.getElementById("Token").style.display = "inline";
+          document.getElementById("Token").innerHTML = "No Data Found😥😥";
+        } else {
+          document.getElementById("Token").style.display = "inline";
+          document.getElementById("Token").innerHTML =
+            "$STABUL Tokens = " + result.Token;
+          document.getElementById("TGE").style.display = "inline";
+          document.getElementById("TGE").innerHTML = "On TGE = " + result.TGE;
+        }
+        console.log("Reward Data:", rewardData);
+        // const apiUrl =
+        //   "https://soneium.blockscout.com/api/v2/addresses/" +
+        //   inputValue +
+        //   "/counters";
+        // fetch(apiUrl)
+        //   .then((response) => {
+        //     if (!response.ok) {
+        //       //throw new Error("Network response was not ok");
+        //       document.getElementById("down1").style.display = "inline";
+        //       document.getElementById("down1").innerHTML = "Try Again!!😥😥";
+        //     }
+        //     return response.json();
+        //   })
+        //   .then((data) => {
+        //     console.log(data.transactions_count);
+        //     transact = data.transactions_count;
+
+        //     document.getElementById("down1").style.display = "inline";
+        //     document.getElementById("down1").innerHTML =
+        //       "Transaction count = " + transact.toString();
+        //   })
+        //   .catch((error) => {
+        //     console.error("Error:", error);
+        //   });
+        // //navigator.clipboard.writeText("PYCY6142");
+        // //document.getElementById("copying").innerHTML = transact.toString();
+        // document.getElementById("copying").style.backgroundColor = "red";
+        // document.getElementById("copying").style.background =
+        //   "rgb(10, 250, 62)";
+      }
+    </script>
+  </body>
+</html>
