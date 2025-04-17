@@ -74,10 +74,11 @@
         if (result == undefined) {
           document.getElementById("Token").style.display = "inline";
           document.getElementById("Token").innerHTML = "No Data Found😥😥";
+          document.getElementById("TGE").style.display = "none";
         } else {
           document.getElementById("Token").style.display = "inline";
           document.getElementById("Token").innerHTML =
-            "$STABUL Tokens = " + result.Token;
+            "Total Token = " + result.Token.substring(0, 8);
           document.getElementById("TGE").style.display = "inline";
           document.getElementById("TGE").innerHTML = "On TGE = " + result.TGE;
         }
